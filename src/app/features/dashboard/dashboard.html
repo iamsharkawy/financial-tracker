@@ -1,0 +1,85 @@
+<div class="dashboard">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <span class="subtitle">Your financial overview</span>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="cards-grid">
+    <app-summary-card
+      label="Total Balance"
+      icon="account_balance_wallet"
+      type="balance"
+      [value]="balance()"
+    />
+    <app-summary-card
+      label="This Month Income"
+      icon="arrow_downward"
+      type="income"
+      [value]="thisMonthIncome()"
+    />
+    <app-summary-card
+      label="This Month Expenses"
+      icon="arrow_upward"
+      type="expense"
+      [value]="thisMonthExpenses()"
+    />
+    <app-summary-card
+      label="Savings Rate"
+      icon="savings"
+      type="savings"
+      format="percent"
+      [value]="savingsRate()"
+    />
+  </div>
+
+  <!-- Charts row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3 class="chart-title">Spending by category</h3>
+      <div class="chart-wrap">
+        <canvas
+          baseChart
+          [data]="donutChartData()"
+          [options]="donutChartOptions"
+          type="doughnut"
+        ></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card wide">
+      <h3 class="chart-title">Income vs Expenses — last 6 months</h3>
+      <div class="chart-wrap">
+        <canvas baseChart [data]="barChartData()" [options]="barChartOptions" type="bar"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent transactions -->
+  <div class="recent-card">
+    <div class="recent-header">
+      <h3>Recent transactions</h3>
+      <a routerLink="/transactions" class="see-all">See all</a>
+    </div>
+
+    <div class="recent-list">
+      @for (tx of recentTransactions(); track tx.id) {
+        <div class="recent-row">
+          <div class="tx-icon" [class]="tx.type">
+            <mat-icon>
+              {{ tx.type === 'income' ? 'arrow_downward' : 'arrow_upward' }}
+            </mat-icon>
+          </div>
+          <div class="tx-info">
+            <span class="tx-desc">{{ tx.description || tx.category }}</span>
+            <span class="tx-meta">{{ tx.date | date: 'MMM d, y' }}</span>
+          </div>
+          <span class="tx-amount" [class]="tx.type">
+            {{ tx.type === 'income' ? '+' : '-' }}
+            {{ tx.amount | currency: 'EGP ' : 'code' : '1.0-0' }}
+          </span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

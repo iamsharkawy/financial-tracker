@@ -1,0 +1,59 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Transactions</h1>
+    <button class="add-btn" (click)="openForm()">+ Add transaction</button>
+  </div>
+
+  <!-- Search + filter bar -->
+  <div class="filters">
+    <input
+      class="search-input"
+      placeholder="Search transactions..."
+      [value]="searchQuery()"
+      (input)="searchQuery.set($any($event.target).value)"
+    />
+    <div class="filter-chips">
+      @for (f of filterOptions; track f.value) {
+        <button
+          class="chip"
+          [class.active]="activeFilter() === f.value"
+          (click)="activeFilter.set(f.value)"
+        >
+          {{ f.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Transaction list -->
+  <div class="transaction-list">
+    @if (filteredTransactions().length === 0) {
+      <div class="empty-state">
+        <p>No transactions found</p>
+      </div>
+    }
+
+    @for (tx of filteredTransactions(); track tx.id) {
+      <div class="transaction-row">
+        <div class="tx-icon" [class]="tx.type">
+          <mat-icon>{{ tx.type === 'income' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+        </div>
+        <div class="tx-info">
+          <span class="tx-desc">{{ tx.description || tx.category }}</span>
+          <span class="tx-meta">{{ tx.category }} · {{ tx.date | date: 'MMM d, y' }}</span>
+        </div>
+        <span class="tx-amount" [class]="tx.type">
+          {{ tx.type === 'income' ? '+' : '-' }}{{ tx.amount | currency: 'EGP ' : 'code' }}
+        </span>
+        <div class="tx-actions">
+          <button mat-icon-button (click)="openForm(tx)" title="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="delete(tx.id)" title="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

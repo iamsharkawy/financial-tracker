@@ -1,0 +1,16 @@
+<div class="card" [class]="type()">
+  <div class="card-header">
+    <span class="card-label">{{ label() }}</span>
+    <div class="card-icon">
+      <mat-icon>{{ icon() }}</mat-icon>
+    </div>
+  </div>
+  <div class="card-value">
+    @if (format() === 'currency') {
+      {{ value() | currency: 'EGP ' : 'code' : '1.0-0' }}
+    }
+    @if (format() === 'percent') {
+      {{ value() | percent: '1.0-0' }}
+    }
+  </div>
+</div>

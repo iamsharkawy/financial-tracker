@@ -1,0 +1,152 @@
+.dashboard {
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr; // donut smaller, bar chart wider
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  padding: 20px;
+
+  &.wide {
+    // bar chart card — wider by grid layout above
+  }
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin: 0 0 16px;
+}
+
+.chart-wrap {
+  height: 240px; // fixed height required for Chart.js responsive mode
+  position: relative;
+}
+
+.recent-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  padding: 20px;
+}
+
+.recent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.see-all {
+  font-size: 13px;
+  color: #5e35b1;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recent-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tx-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.income {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+  &.expense {
+    background: #fce4ec;
+    color: #c62828;
+  }
+}
+
+.tx-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tx-desc {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tx-meta {
+  font-size: 12px;
+  color: #888;
+}
+
+.tx-amount {
+  font-size: 14px;
+  font-weight: 500;
+
+  &.income {
+    color: #2e7d32;
+  }
+  &.expense {
+    color: #c62828;
+  }
+}

@@ -1,0 +1,60 @@
+<div class="form-container">
+  <h2 class="form-title">{{ isEditMode ? 'Edit' : 'Add' }} Transaction</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Type toggle: income or expense -->
+    <div class="type-toggle">
+      <button
+        type="button"
+        [class.active]="form.get('type')?.value === 'income'"
+        (click)="form.get('type')?.setValue('income')"
+      >
+        Income
+      </button>
+      <button
+        type="button"
+        [class.active]="form.get('type')?.value === 'expense'"
+        (click)="form.get('type')?.setValue('expense')"
+      >
+        Expense
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Amount (EGP)</mat-label>
+      <input matInput type="number" formControlName="amount" min="0" />
+      @if (form.get('amount')?.hasError('required') && form.get('amount')?.touched) {
+        <mat-error>Amount is required</mat-error>
+      }
+      @if (form.get('amount')?.hasError('min')) {
+        <mat-error>Amount must be positive</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        @for (cat of categories; track cat.value) {
+          <mat-option [value]="cat.value">{{ cat.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput type="date" formControlName="date" />
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button type="button" mat-stroked-button (click)="dialogRef.close()">Cancel</button>
+      <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
+        {{ isEditMode ? 'Save changes' : 'Add transaction' }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,63 @@
+<div class="budgets-page">
+  <div class="page-header">
+    <div>
+      <h1>Budgets</h1>
+      <span class="subtitle">{{ currentMonthLabel }}</span>
+    </div>
+    <button class="add-btn" (click)="openForm()"><mat-icon>add</mat-icon> Add budget</button>
+  </div>
+
+  <!-- Overview cards -->
+  <div class="overview-grid">
+    <div class="overview-card">
+      <span class="overview-label">Total budgeted</span>
+      <span class="overview-value">
+        {{ totalBudgeted() | currency: 'EGP ' : 'code' : '1.0-0' }}
+      </span>
+    </div>
+    <div class="overview-card">
+      <span class="overview-label">Total spent</span>
+      <span class="overview-value">
+        {{ totalSpent() | currency: 'EGP ' : 'code' : '1.0-0' }}
+      </span>
+    </div>
+    <div class="overview-card">
+      <span class="overview-label">Overall usage</span>
+      <span class="overview-value">{{ overallPercentage() }}%</span>
+    </div>
+  </div>
+
+  <!-- Overall progress bar -->
+  @if (totalBudgeted() > 0) {
+    <div class="overall-bar-wrap">
+      <div class="overall-bar-track">
+        <div
+          class="overall-bar-fill"
+          [style.width.%]="overallPercentage()"
+          [class.exceeded]="overallPercentage() >= 100"
+          [class.warning]="overallPercentage() >= 80 && overallPercentage() < 100"
+        ></div>
+      </div>
+      <span class="overall-bar-label"> {{ overallPercentage() }}% of total budget used </span>
+    </div>
+  }
+
+  <!-- Budget list -->
+  @if (budgetProgress().length === 0) {
+    <div class="empty-state">
+      <mat-icon>savings</mat-icon>
+      <p>No budgets set for {{ currentMonthLabel }}</p>
+      <button class="add-btn" (click)="openForm()">Set your first budget</button>
+    </div>
+  } @else {
+    <div class="budget-grid">
+      @for (b of budgetProgress(); track b.id) {
+        <app-budget-progress
+          [budget]="b"
+          (onEdit)="openForm(getBudgetById(b.id))"
+          (onDelete)="delete(b.id)"
+        />
+      }
+    </div>
+  }
+</div>

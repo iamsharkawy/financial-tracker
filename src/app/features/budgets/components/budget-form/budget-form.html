@@ -1,0 +1,35 @@
+<div class="form-container">
+  <h2 class="form-title">{{ isEditMode ? 'Edit budget' : 'Add budget' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category" [disabled]="isEditMode">
+        @for (cat of allCategories; track cat.value) {
+          <mat-option [value]="cat.value">{{ cat.label }}</mat-option>
+        }
+      </mat-select>
+      @if (form.get('category')?.hasError('required') && form.get('category')?.touched) {
+        <mat-error>Please select a category</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Monthly limit (EGP)</mat-label>
+      <input matInput type="number" formControlName="monthlyLimit" min="1" />
+      @if (form.get('monthlyLimit')?.hasError('required') && form.get('monthlyLimit')?.touched) {
+        <mat-error>Amount is required</mat-error>
+      }
+      @if (form.get('monthlyLimit')?.hasError('min')) {
+        <mat-error>Must be at least 1 EGP</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button type="button" mat-stroked-button (click)="dialogRef.close()">Cancel</button>
+      <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
+        {{ isEditMode ? 'Save changes' : 'Add budget' }}
+      </button>
+    </div>
+  </form>
+</div>

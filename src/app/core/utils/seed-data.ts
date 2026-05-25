@@ -1,0 +1,66 @@
+import { Transaction } from '../models/transaction.model';
+
+export const SEED_TRANSACTIONS: Omit<Transaction, 'id' | 'createdAt'>[] = [
+  {
+    type: 'income',
+    amount: 18000,
+    category: 'salary',
+    description: 'March salary',
+    date: '2026-03-01',
+  },
+  { type: 'expense', amount: 5500, category: 'housing', description: 'Rent', date: '2026-03-02' },
+  { type: 'expense', amount: 850, category: 'food', description: 'Groceries', date: '2026-03-05' },
+  {
+    type: 'expense',
+    amount: 320,
+    category: 'transport',
+    description: 'Uber & metro',
+    date: '2026-03-07',
+  },
+  {
+    type: 'income',
+    amount: 3200,
+    category: 'freelance',
+    description: 'UI design project',
+    date: '2026-03-10',
+  },
+  {
+    type: 'expense',
+    amount: 450,
+    category: 'entertainment',
+    description: 'Cinema & dinner',
+    date: '2026-03-14',
+  },
+  { type: 'expense', amount: 210, category: 'health', description: 'Pharmacy', date: '2026-03-18' },
+  {
+    type: 'income',
+    amount: 18000,
+    category: 'salary',
+    description: 'April salary',
+    date: '2026-04-01',
+  },
+  { type: 'expense', amount: 5500, category: 'housing', description: 'Rent', date: '2026-04-02' },
+  { type: 'expense', amount: 920, category: 'food', description: 'Groceries', date: '2026-04-06' },
+  {
+    type: 'expense',
+    amount: 380,
+    category: 'transport',
+    description: 'Transport April',
+    date: '2026-04-09',
+  },
+  {
+    type: 'income',
+    amount: 18000,
+    category: 'salary',
+    description: 'May salary',
+    date: '2026-05-01',
+  },
+  { type: 'expense', amount: 5500, category: 'housing', description: 'Rent', date: '2026-05-02' },
+  {
+    type: 'expense',
+    amount: 1100,
+    category: 'food',
+    description: 'Groceries + dining',
+    date: '2026-05-08',
+  },
+];

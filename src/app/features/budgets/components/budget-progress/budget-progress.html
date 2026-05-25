@@ -1,0 +1,52 @@
+<div class="progress-card" [class]="budget().status">
+  <div class="card-top">
+    <div class="category-info">
+      <span class="category-name">{{ budget().category | titlecase }}</span>
+      <span class="status-badge" [class]="budget().status">
+        @if (budget().status === 'exceeded') {
+          Over budget
+        } @else if (budget().status === 'warning') {
+          Near limit
+        } @else {
+          On track
+        }
+      </span>
+    </div>
+    <div class="card-actions">
+      <button mat-icon-button (click)="onEdit.emit()" title="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDelete.emit()" title="Delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- progress bar -->
+  <div class="progress-track">
+    <div
+      class="progress-fill"
+      [class]="budget().status"
+      [style.width.%]="budget().percentage"
+    ></div>
+  </div>
+
+  <div class="card-bottom">
+    <span class="spent"> {{ budget().spent | currency: 'EGP ' : 'code' : '1.0-0' }} spent </span>
+    <span class="percentage">{{ budget().percentage }}%</span>
+    <span class="limit">
+      of {{ budget().monthlyLimit | currency: 'EGP ' : 'code' : '1.0-0' }}
+    </span>
+  </div>
+
+  @if (budget().status !== 'exceeded') {
+    <div class="remaining">
+      {{ budget().remaining | currency: 'EGP ' : 'code' : '1.0-0' }} remaining
+    </div>
+  } @else {
+    <div class="remaining exceeded">
+      {{ budget().spent - budget().monthlyLimit | currency: 'EGP ' : 'code' : '1.0-0' }}
+      over budget
+    </div>
+  }
+</div>

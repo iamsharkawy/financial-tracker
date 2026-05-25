@@ -1,0 +1,41 @@
+<div class="shell">
+  <!-- Mobile top bar -->
+  <header class="mobile-header">
+    <span class="logo">💰 Finance Tracker</span>
+    <button class="menu-btn" (click)="toggleMenu()" aria-label="Toggle menu">
+      <mat-icon>{{ menuOpen() ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </header>
+
+  <!-- Overlay for mobile -->
+  @if (menuOpen()) {
+    <div class="overlay" (click)="closeMenu()"></div>
+  }
+
+  <aside class="sidebar" [class.open]="menuOpen()">
+    <div class="logo desktop-only">💰 Finance Tracker</div>
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="closeMenu()">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+      <a
+        routerLink="/transactions"
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="closeMenu()"
+      >
+        <mat-icon>receipt_long</mat-icon>
+        Transactions
+      </a>
+      <a routerLink="/budgets" routerLinkActive="active" class="nav-item" (click)="closeMenu()">
+        <mat-icon>savings</mat-icon>
+        Budgets
+      </a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>
