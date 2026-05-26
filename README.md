@@ -1,59 +1,65 @@
-# FinanceTracker
+# 💰 Finance Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+A personal finance management app built with **Angular 21** and **Angular Material**.
+Track income and expenses, visualize spending patterns, and set monthly budget goals.
 
-## Development server
+🔗 **[Live Demo](https://financial-tracker-tawny-two.vercel.app/dashboard)**
 
-To start a local development server, run:
+---
+
+## Screenshots
+
+> ![Dashboard](.github/screenshots/ft-screen1.png)
+
+> ![Transactions](.github/screenshots/ft-screen2.png)
+
+> ![Budgets](.github/screenshots/ft-screen3.png)
+
+---
+
+## Features
+
+- **Dashboard** — balance overview, spending by category (donut chart),
+  income vs expenses over 6 months (bar chart), recent transactions
+- **Transactions** — add, edit, delete transactions with real-time search and filters
+- **Budgets** — set monthly spending limits per category with progress tracking
+  and warning states
+
+---
+
+## Tech stack
+
+### Made with vibe coding using Claude Code
+
+| Tech | Purpose |
+|------|---------|
+| Angular 21 | Framework — standalone components, signals, computed |
+| Angular Material | UI component library |
+| Chart.js + ng2-charts | Data visualization |
+| date-fns | Date formatting and calculations |
+| localStorage | Client-side persistence (no backend needed) |
+| Prettier + ESLint | Code quality and formatting |
+
+---
+
+## Angular concepts demonstrated
+
+- **Signals & computed()** — reactive state without RxJS boilerplate
+- **Smart / dumb component pattern** — clear separation of data and presentation
+- **Lazy loading** — each feature loads only when navigated to
+- **Reactive Forms** — with validators and error messages
+- **Angular Material dialogs** — data in via MAT_DIALOG_DATA, result out via afterClosed()
+- **Feature-based folder structure** — scalable architecture
+
+---
+
+## Run locally
 
 ```bash
+git clone repo url
+cd financial-tracker
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Open `http://localhost:4200`
