@@ -9,11 +9,11 @@ Track income and expenses, visualize spending patterns, and set monthly budget g
 
 ## Screenshots
 
-> ![Dashboard](.github/screenshots/ft-screen1.png)
+> ![Dashboard](./screenshots/ft-screen1.png)
 
-> ![Transactions](.github/screenshots/ft-screen2.png)
+> ![Transactions](./screenshots/ft-screen2.png)
 
-> ![Budgets](.github/screenshots/ft-screen3.png)
+> ![Budgets](./screenshots/ft-screen3.png)
 
 ---
 
